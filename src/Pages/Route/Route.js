@@ -10,6 +10,7 @@ import TermsAndConditions from '../TermsAndConditions/TermsAndConditions';
 import UserProfile from '../UserProfile/UserProfile';
 import PrivateRoute from './PrivateRoute';
 import CourseSummary from '../Courses/CourseSummary';
+import CourseDetails from '../CourseDetails/CourseDetails';
 
 
 export const routes = createBrowserRouter([
@@ -23,7 +24,7 @@ export const routes = createBrowserRouter([
             },
             {
                 path: '/courses/:id',
-                element: <CourseSummary></CourseSummary>,
+                element: <CourseDetails></CourseDetails>,
                 loader: ({ params }) => fetch(`http://localhost:5000/courses/${params.id}`)
             },
             {
