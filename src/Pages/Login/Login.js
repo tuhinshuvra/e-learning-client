@@ -1,11 +1,50 @@
-import { GoogleAuthProvider } from 'firebase/auth';
-import React, { useContext } from 'react';
-import { Button } from 'react-bootstrap';
+import React, { useContext, useReducer, useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { FaGoogle, FaGithub } from 'react-icons/fa';
+import { useLocation, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../Authentication/AuthProvider';
+import { ButtonGroup } from 'react-bootstrap';
+import { GoogleAuthProvider } from 'firebase/auth';
 import './Login.css';
 
+
 const Login = () => {
-    const { user, googleProviderLogin } = useContext(AuthContext);
+    const [error, setError, setLoading] = useState('');
+    const { user, signIn, googleProviderLogin } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
+
+    const handleOnSubmit = (event) => {
+        event.preventDefault();
+        const form = event.target;
+
+        const email = form.email.value;
+        const password = form.password.value;
+
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log("User Data : ", user);
+                form.reset();
+                setError('');
+                if (user.emailVerified) {
+                    navigate(from, { replace: true });
+                } else {
+                    toast.error('Your email is not verified.');
+                }
+            })
+            .catch(error => {
+                setError(error.message)
+                console.log("Error : ", error);
+            })
+            .finally(() => {
+                setLoading(false);
+            })
+    }
 
     const googleProvider = new GoogleAuthProvider();
 
@@ -13,23 +52,43 @@ const Login = () => {
         googleProviderLogin(googleProvider)
             .then(result => {
                 const userData = result.user;
-                console.log("Google User Data:", userData);
+                console.log("User Data : ", userData);
             })
-            .catch(error => {
-                console.error("Google Provider Error:", error);
-            })
-
+            .catch(error => console.error("Provider Error : ", error))
     }
-    return (
-        <div>
-            <h5>This is {user?.displayName}</h5>
-            <h2>This is login page</h2>
-            <Button onClick={handleGoogleSignIn}>Google SignIn</Button> <br />
-            <Button className=' mt-1'>Github SignIn</Button> <br />
-            <Button className=' mt-1'>SignIn With Email and Password</Button>
 
+    return (
+        <div className='container p-5'>
+
+            <h3 className=' text-center fw-bold text-primary'>Login Form</h3>
+
+            <Form onSubmit={handleOnSubmit}>
+                <Form.Text className=" text-danger text-center ">
+                    {error}
+                </Form.Text>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control name='email' type="email" placeholder="Enter email" required />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control name='password' type="password" placeholder="Password" required />
+                </Form.Group>
+
+                <Button className="" variant="primary " type="submit">
+                    Login
+                </Button>
+            </Form>
+
+            <div className=' mt-5 text-center'>
+                <ButtonGroup vertical>
+                    <Button onClick={handleGoogleSignIn} variant='outline-primary' className=' mb-1'><FaGoogle /> Login With Google</Button>
+                    <Button variant='outline-secondary'><FaGithub /> Login With Github</Button>
+                </ButtonGroup>
+            </div>
         </div>
     );
 };
 
-export default Login; <h2>This is login page</h2>
+export default Login;
