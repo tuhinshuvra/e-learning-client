@@ -1,10 +1,8 @@
 import React, { useContext, useState } from 'react';
-import './Register.css';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import toast from 'react-hot-toast';
-import { AuthContext } from '../Authentication/AuthProvider';
+import { Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../Authentication/AuthProvider';
+import toast from 'react-hot-toast';
 import './Register.css';
 
 const Register = () => {

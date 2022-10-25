@@ -8,6 +8,8 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import TermsAndConditions from '../TermsAndConditions/TermsAndConditions';
 import UserProfile from '../UserProfile/UserProfile';
+import PrivateRoute from './PrivateRoute';
+import Courses from '../Courses/Courses';
 
 
 export const routes = createBrowserRouter([
@@ -17,6 +19,11 @@ export const routes = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>
+            },
+            {
+                path: '/courses/:id',
+                element: <Courses></Courses>,
+                loader: ({ params }) => fetch(`http://localhost:5000/courses/${params.id}`)
             },
             {
                 path: '/blog',
@@ -32,7 +39,7 @@ export const routes = createBrowserRouter([
             },
             {
                 path: '/profile',
-                element: <UserProfile></UserProfile>
+                element: <PrivateRoute> <UserProfile /></PrivateRoute>
             },
             {
                 path: '/terms',

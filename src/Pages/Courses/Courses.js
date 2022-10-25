@@ -1,7 +1,7 @@
 import React from 'react';
-import './Course.css';
+import './Courses.css';
 
-const Course = () => {
+const Courses = () => {
     return (
         <div>
             <h2>This is Course Page</h2>
@@ -9,4 +9,4 @@ const Course = () => {
     );
 };
 
-export default Course;
+export default Courses;

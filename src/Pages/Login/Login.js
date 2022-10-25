@@ -1,12 +1,10 @@
 import React, { useContext, useReducer, useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+import { ButtonGroup, Button, Form } from 'react-bootstrap';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
 import { AuthContext } from '../Authentication/AuthProvider';
-import { ButtonGroup } from 'react-bootstrap';
-import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+import toast from 'react-hot-toast';
 import './Login.css';
 
 

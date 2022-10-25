@@ -3,6 +3,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { Outlet } from 'react-router-dom';
 import Footer from '../Pages/Footer/Footer';
 import Header from '../Pages/Header/Header';
+import LeftSideNav from '../Pages/LeftSideNav/LeftSideNav';
 
 const Main = () => {
     return (
@@ -11,7 +12,7 @@ const Main = () => {
             <Container>
                 <Row>
                     <Col lg='2'>
-                        <h6>This is LeftSide Nav</h6>
+                        <LeftSideNav></LeftSideNav>
                     </Col>
                     <Col lg='10'>
                         <Outlet></Outlet>
