@@ -9,13 +9,14 @@ const Home = () => {
     return (
         <div>
             <h2>Brain Food Home {allCourse.length}</h2>
-            {allCourse.map(course =>
-                <CourseSummary
-                    key={course.id}
-                    course={course}
-                ></CourseSummary>
-
-            )}
+            <div className="all-course">
+                {allCourse.map(course =>
+                    <CourseSummary
+                        key={course.id}
+                        course={course}
+                    ></CourseSummary>
+                )}
+            </div>
         </div>
     );
 };
