@@ -11,7 +11,7 @@ import './Login.css';
 
 
 const Login = () => {
-    const [error, setError, setLoading] = useState('');
+    const [error, setError] = useState('');
     const { user, signIn, googleProviderLogin, githubProviderLogin } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
@@ -31,18 +31,18 @@ const Login = () => {
                 console.log("User Data : ", user);
                 form.reset();
                 setError('');
-                if (user.emailVerified) {
-                    navigate(from, { replace: true });
-                } else {
-                    toast.error('Your email is not verified.');
-                }
+                // if (user.emailVerified) {
+                //     navigate(from, { replace: true });
+                // } else {
+                //     toast.error('Your email is not verified.');
+                // }
             })
             .catch(error => {
                 setError(error.message)
                 console.log("Error : ", error);
             })
             .finally(() => {
-                setLoading(false);
+                // setLoading(false);
             })
     }
 
