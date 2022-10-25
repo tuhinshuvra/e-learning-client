@@ -41,8 +41,8 @@ function Header() {
                         </NavDropdown>
                     </Nav>
                     <Nav>
-                        <Nav.Link href="#deets">More deets</Nav.Link>
-                        <Nav.Link eventKey={2} href="#memes">
+                        <Link className=' text-decoration-none text-light fw-bolder me-2' to="/blog" >Blog</Link>
+                        <Nav>
                             {user?.uid ?
                                 <div>
                                     {user?.displayName}
@@ -61,7 +61,7 @@ function Header() {
                                     <Link className=' text-decoration-none text-light fw-bolder' to="/login">Login</Link>
                                 </>
                             }
-                        </Nav.Link>
+                        </Nav>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
