@@ -6,13 +6,13 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../Authentication/AuthProvider';
 import { ButtonGroup } from 'react-bootstrap';
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import './Login.css';
 
 
 const Login = () => {
     const [error, setError, setLoading] = useState('');
-    const { user, signIn, googleProviderLogin } = useContext(AuthContext);
+    const { user, signIn, googleProviderLogin, githubProviderLogin } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -47,14 +47,23 @@ const Login = () => {
     }
 
     const googleProvider = new GoogleAuthProvider();
-
     const handleGoogleSignIn = () => {
         googleProviderLogin(googleProvider)
             .then(result => {
                 const userData = result.user;
-                console.log("User Data : ", userData);
+                console.log("Google User Data : ", userData);
             })
-            .catch(error => console.error("Provider Error : ", error))
+            .catch(error => console.error("Google Provider Error : ", error))
+    }
+
+    const githubProvider = new GithubAuthProvider();
+    const handleGithubSignIn = () => {
+        githubProviderLogin(githubProvider)
+            .then(result => {
+                const userData = result.user;
+                console.log("Github User Data : ", userData);
+            })
+            .catch(error => console.error("Github Provider Error : ", error))
     }
 
     return (
@@ -81,10 +90,10 @@ const Login = () => {
                 </Button>
             </Form>
 
-            <div className=' mt-5 text-center'>
+            <div className=' mt-2 text-center'>
                 <ButtonGroup vertical>
                     <Button onClick={handleGoogleSignIn} variant='outline-primary' className=' mb-1'><FaGoogle /> Login With Google</Button>
-                    <Button variant='outline-secondary'><FaGithub /> Login With Github</Button>
+                    <Button onClick={handleGithubSignIn} variant='outline-secondary'><FaGithub /> Login With Github</Button>
                 </ButtonGroup>
             </div>
         </div>
