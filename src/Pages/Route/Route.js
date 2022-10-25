@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import Main from '../../layout/Main';
 import Blog from '../Blog/Blog';
 import Home from '../Home/Home';
+import ErrorPage from '../ErrorPage/ErrorPage';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import TermsAndConditions from '../TermsAndConditions/TermsAndConditions';
@@ -17,11 +18,6 @@ export const routes = createBrowserRouter([
                 path: '/',
                 element: <Home></Home>
             },
-
-
-
-
-
             {
                 path: '/blog',
                 element: <Blog></Blog>
@@ -41,6 +37,9 @@ export const routes = createBrowserRouter([
             {
                 path: '/terms',
                 element: <TermsAndConditions></TermsAndConditions>
+            },
+            {
+                path: "*", element: <ErrorPage></ErrorPage>
             },
         ]
     }
