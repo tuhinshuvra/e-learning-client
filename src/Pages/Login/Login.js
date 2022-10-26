@@ -2,15 +2,16 @@ import React, { useContext, useReducer, useState } from 'react';
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import { ButtonGroup, Button, Form } from 'react-bootstrap';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Authentication/AuthProvider';
 import toast from 'react-hot-toast';
 import './Login.css';
 
 
 const Login = () => {
+    const { user, setLoading, signIn, googleProviderLogin, githubProviderLogin } = useContext(AuthContext);
+
     const [error, setError] = useState('');
-    const { user, signIn, googleProviderLogin, githubProviderLogin } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -30,7 +31,7 @@ const Login = () => {
                 form.reset();
                 setError('');
                 // if (user.emailVerified) {
-                //     navigate(from, { replace: true });
+                navigate(from, { replace: true });
                 // } else {
                 //     toast.error('Your email is not verified.');
                 // }
@@ -40,7 +41,7 @@ const Login = () => {
                 console.log("Error : ", error);
             })
             .finally(() => {
-                // setLoading(false);
+                setLoading(false);
             })
     }
 
@@ -49,6 +50,8 @@ const Login = () => {
         googleProviderLogin(googleProvider)
             .then(result => {
                 const userData = result.user;
+                setError('');
+                navigate(from, { replace: true });
                 console.log("Google User Data : ", userData);
             })
             .catch(error => console.error("Google Provider Error : ", error))
@@ -59,6 +62,8 @@ const Login = () => {
         githubProviderLogin(githubProvider)
             .then(result => {
                 const userData = result.user;
+                setError('');
+                navigate(from, { replace: true });
                 console.log("Github User Data : ", userData);
             })
             .catch(error => console.error("Github Provider Error : ", error))
@@ -86,6 +91,7 @@ const Login = () => {
                 <Button className="" variant="primary " type="submit">
                     Login
                 </Button>
+                <p className=' text-primary'>If you are not yet registered <Link to="/register" >go to Register</Link></p>
             </Form>
 
             <div className=' mt-2 text-center'>

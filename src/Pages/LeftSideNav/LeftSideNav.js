@@ -5,7 +5,7 @@ import './LeftSideNav.css';
 const LeftSideNav = () => {
     const [courses, setCourses] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/courses')
+        fetch('https://brain-food-server.vercel.app/courses')
             .then(response => response.json())
             .then(data => setCourses(data))
     }, [])

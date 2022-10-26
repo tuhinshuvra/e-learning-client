@@ -22,7 +22,7 @@ function Header() {
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
-                <Navbar.Brand> <Link className=' text-decoration-none fw-bolder text-light' to='/'>BrainFood Course </Link> </Navbar.Brand>
+                <Navbar.Brand> <Link className=' text-decoration-none fw-bolder text-light' to='/'>BrainBoost Course </Link> </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
@@ -41,6 +41,7 @@ function Header() {
                         </NavDropdown>
                     </Nav>
                     <Nav>
+                        <Link className=' text-decoration-none text-light fw-bolder me-2' to="/">All Course</Link>
                         <Link className=' text-decoration-none text-light fw-bolder me-2' to="/blog" >Blog</Link>
                         <Nav>
                             {user?.uid ?
