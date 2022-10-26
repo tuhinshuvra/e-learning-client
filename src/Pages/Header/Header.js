@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Button, Image } from 'react-bootstrap';
+import { Button, Image, NavItem } from 'react-bootstrap';
 import { FaUser } from 'react-icons/fa';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -8,6 +8,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Authentication/AuthProvider';
 import LeftSideNav from '../LeftSideNav/LeftSideNav';
+import Logo from '../../logo/brain_boost_course_logo.png';
 import './Header.css';
 
 
@@ -23,7 +24,11 @@ function Header() {
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
-                <Navbar.Brand> <Link className=' text-decoration-none fw-bolder text-light' to='/'>BrainBoost Course </Link> </Navbar.Brand>
+                <Link className=' text-decoration-none fw-bolder text-light' to='/'>
+                    <Image className=' me-2' style={{ width: "55px" }} src={Logo} alt=""></Image>
+                    <Navbar.Brand>  BrainBoost Course  </Navbar.Brand>
+                </Link>
+
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
