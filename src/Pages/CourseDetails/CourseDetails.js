@@ -3,6 +3,7 @@ import { Button, Card, CardImg } from 'react-bootstrap';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../Authentication/AuthProvider';
+import './CourseDetails.css';
 
 const CourseDetails = () => {
     const { selected, selectedCourse } = useContext(AuthContext);
@@ -17,7 +18,7 @@ const CourseDetails = () => {
         <div>
             <Card className=' mt-3'>
                 <Card.Header className=' d-flex justify-content-between'>
-                    <Card.Title className=' fw-bolder display-6 ' >{name} Course Details </Card.Title>
+                    <Card.Title className=' details_title display-6 fw-bolder' >{name} Course Details </Card.Title>
                     <Button variant="primary">Download as Pdf</Button>
                 </Card.Header>
                 <Card.Body>

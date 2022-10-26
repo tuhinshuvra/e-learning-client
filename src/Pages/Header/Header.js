@@ -7,8 +7,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Authentication/AuthProvider';
-import './Header.css';
 import LeftSideNav from '../LeftSideNav/LeftSideNav';
+import './Header.css';
 
 
 function Header() {
@@ -29,7 +29,7 @@ function Header() {
                     <Nav className="me-auto">
                         {/* <Nav.Link href="#features">Features</Nav.Link> */}
                         {/* <Nav.Link href="#pricing">Pricing</Nav.Link> */}
-                        <NavDropdown title="All Course" id="collasible-nav-dropdown">
+                        <NavDropdown className=' d-lg-none ' title="All Course" id="collasible-nav-dropdown">
                             {/* <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">
                                 Another action
