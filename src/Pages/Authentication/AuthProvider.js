@@ -37,6 +37,7 @@ const AuthProvider = ({ children }) => {
     }
 
     const updateUserProfile = (profile) => {
+        setLoading(true);
         return updateProfile(user.currentUser, profile);
     }
 
@@ -52,6 +53,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
     const selectedCourse = (id) => {
+        setLoading(false);
         setSelected(id);
     }
 

@@ -13,7 +13,7 @@ const CourseSummary = ({ course }) => {
             <Container>
                 <Row>
                     <Col>
-                        <Card>
+                        <Card className=' mb-5'>
                             <Card.Img style={{ height: '200px' }} variant="top" src={img} />
                             <Card.Body>
                                 <Card.Title>{name}</Card.Title>
