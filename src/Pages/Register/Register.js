@@ -9,7 +9,7 @@ const Register = () => {
     const [error, setError] = useState('');
     const [accepted, setAccepted] = useState(false);
 
-    const { createUser } = useContext(AuthContext);
+    const { createUser, updateUserProfile } = useContext(AuthContext);
 
     const handleOnSubmit = (event) => {
         event.preventDefault();
@@ -24,39 +24,30 @@ const Register = () => {
         createUser(email, password)
             .then(result => {
                 console.log("User Data:", result.user);
+                toast.success('User created successfully.')
                 setError('');
                 form.reset();
                 // handleUpdateUserProfile(name, photoURL);
-                // handleEmailVerification();
-                // toast.success('Please verify your email address.');
             })
             .catch(error => {
                 console.log("Error : ", error)
                 setError(error.message)
             })
+    }
 
+    const handleUpdateUserProfile = (name, photoURL) => {
+        const profile = {
+            displayName: name,
+            photoURL: photoURL
+        }
+        updateUserProfile(profile)
+            .then(() => { })
+            .catch(error => console.log("Update User Error : ", error))
     }
 
     const handleTermsAndCondition = (event) => {
         setAccepted(event.target.checked);
     }
-
-    // const handleUpdateUserProfile = (name, photoURL) => {
-    //     const profile = {
-    //         displayName: name,
-    //         photoURL: photoURL
-    //     }
-    //     updateUserProfile(profile)
-    //         .then(() => { })
-    //         .catch(error => console.log("Error:", error))
-    // }
-
-    // const handleEmailVerification = () => {
-    //     verifyEmail()
-    //         .then(() => { })
-    //         .catch(error => console.log(error))
-
-    // }
 
     return (
         <div className='container p-5'>
@@ -69,7 +60,7 @@ const Register = () => {
 
                 <Form.Group className="mb-3" controlId="formFullName">
                     <Form.Label>Full Name</Form.Label>
-                    <Form.Control name='name' type="text" placeholder="Enter full name" required />
+                    <Form.Control name='name' type="text" placeholder="Enter full name" />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formPhotoUrl">
@@ -99,7 +90,7 @@ const Register = () => {
                         label={<>Accept <Link to="/terms"> Terms and Conditions</Link> </>}
                     ></Form.Check>
                 </Form.Group>
-                <p className='text-primary'>If you are all ready registered <Link to="/login">go to Login</Link></p>
+                <p className='text-primary'>If you are already registered <Link to="/login">go to Login</Link></p>
 
                 <Button className="" variant="primary " type="submit" disabled={!accepted}>
                     Register

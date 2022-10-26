@@ -43,7 +43,7 @@ function Header() {
                     <Nav>
                         <Link className=' text-decoration-none text-light fw-bolder me-2' to="/">All Course</Link>
                         <Link className=' text-decoration-none text-light fw-bolder me-2' to="/blog" >Blog</Link>
-                        <Nav>
+                        <Nav className=' text-light'>
                             {user?.uid ?
                                 <div>
                                     {user?.displayName}
@@ -53,7 +53,7 @@ function Header() {
                                         user?.photoURL ?
                                             <Link to="/profile"> <Image roundedCircle style={{ width: '30px' }} src={user?.photoURL}></Image></Link>
                                             :
-                                            <FaUser className='ms-2'></FaUser>
+                                            <Link to="/profile"> <FaUser className='ms-2'></FaUser></Link>
                                     }
                                 </div>
                                 :

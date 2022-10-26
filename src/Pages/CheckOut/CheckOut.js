@@ -13,7 +13,7 @@ const CheckOut = () => {
             .then(data => setCourses(data))
     }, [])
 
-    const selectedCourse = courses.find(crouse => crouse.id == selected)
+    const selectedCourse = courses.find(crouse => crouse.id === selected)
     // const { details } = selectedCourse;
     console.log("selectedCourse : ", selectedCourse);
 

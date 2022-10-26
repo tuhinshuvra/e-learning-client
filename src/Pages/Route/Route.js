@@ -53,6 +53,11 @@ export const routes = createBrowserRouter([
                 element: <TermsAndConditions></TermsAndConditions>
             },
             {
+                path: "/profile",
+                element: <PrivateRoute> <UserProfile></UserProfile></PrivateRoute>
+
+            },
+            {
                 path: "*", element: <ErrorPage></ErrorPage>
             },
         ]
