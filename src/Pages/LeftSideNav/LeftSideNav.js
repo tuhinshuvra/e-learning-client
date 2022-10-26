@@ -12,7 +12,7 @@ const LeftSideNav = () => {
 
     return (
         <div>
-            <h5 className='fw-bold text-center mt-5 mb-3'>All Courses</h5>
+            <h5 className='fw-bold text-lg-center mt-lg-5 mb-lg-3'>All Courses</h5>
             {courses.map(course =>
                 <p key={course.id}>
                     <Link className='text-decoration-none fw-bold shadow-lg ' to={`/courses/${course.id}`} >{course.name} Learning </Link>
