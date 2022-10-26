@@ -9,18 +9,19 @@ const CourseSummary = ({ course }) => {
     console.log("detailsLength:", detailsLength);
     return (
         <div>
-            {/* <h2>Course Summary</h2> */}
             <Container>
                 <Row>
                     <Col>
-                        <Card className=' mb-5'>
+                        <Card className=' mb-5 shadow-lg'>
                             <Card.Img style={{ height: '200px' }} variant="top" src={img} />
                             <Card.Body>
-                                <Card.Title>{name}</Card.Title>
+                                <Card.Title>{name} Learning</Card.Title>
                                 <Card.Text>
                                     {
                                         details.length > 70 ?
-                                            <>{details.slice(0, 70) + '...'} <Link to={`/courses/${id}`}>Details</Link> </>
+                                            <>{details.slice(0, 70) + '...'}
+                                                <Link className=' text-decoration-none fw-bolder' to={`/courses/${id}`}>Show Details</Link>
+                                            </>
                                             :
                                             <> {details}</>
                                     }

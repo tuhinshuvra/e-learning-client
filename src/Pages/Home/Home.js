@@ -8,7 +8,7 @@ const Home = () => {
     console.log("All Course : ", allCourse);
     return (
         <div>
-            <h2>Brain Food Home {allCourse.length}</h2>
+            <h2 className=' display-6 text-center fw-bold mt-3 mb-3 '>All Brain Boost Courses</h2>
             <div className="all-course">
                 {allCourse.map(course =>
                     <CourseSummary
