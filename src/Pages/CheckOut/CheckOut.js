@@ -14,14 +14,8 @@ const CheckOut = () => {
             .then(data => setCourses(data))
     }, [])
 
-    if (selected === []) {
-        toast.error('You have no course selected yet!');
-        return
-    } else {
-        const selectedCourse = courses.find(crouse => crouse.id === selected.id)
-        const { name } = selectedCourse;
-        console.log("selectedCourse Name : ", name);
-    }
+
+
 
 
     return (

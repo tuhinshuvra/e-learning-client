@@ -21,17 +21,26 @@ const Register = () => {
         const password = form.password.value;
         const confirmPassword = form.confirm.value;
 
+        if (password.length < 6) {
+            setError('Password must be more than 6 character.');
+            return;
+        }
+        if (password !== confirmPassword) {
+            setError('Password do not matched');
+            return;
+        }
+
         createUser(email, password)
             .then(result => {
                 console.log("User Data:", result.user);
                 toast.success('User created successfully.')
                 setError('');
                 form.reset();
-                // handleUpdateUserProfile(name, photoURL);
+                handleUpdateUserProfile(name, photoURL);
             })
             .catch(error => {
                 console.log("Error : ", error)
-                setError(error.message)
+                setError(error.message);
             })
     }
 

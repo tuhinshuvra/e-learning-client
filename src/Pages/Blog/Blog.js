@@ -4,7 +4,7 @@ import './Blog.css';
 function Blog() {
     return (
         <div className=' container'>
-            <h2 className=' text-center fw-bolder text-primary mt-4 mb-4'>Brain Food Course Blog</h2>
+            <h2 className=' text-center fw-bolder text-primary mt-4 mb-4'>Brain Boost Course Blog</h2>
 
             <Accordion>
                 <Accordion.Item eventKey="0">
