@@ -1,0 +1,14 @@
+body {
+    position: relative;
+}
+
+
+.footer {
+    position: absolute;
+    width: 100%;
+    margin-top: 0px;
+    /* negative value of footer height */
+    /* height: 150px; */
+    clear: both;
+    padding-top: 20px;
+}
