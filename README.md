@@ -1,5 +1,5 @@
 ## ProjectName: Brain Boost Course
-## Live Stie Link : https://brain-food-course.web.app
+## Live Site Link : https://brain-food-course.web.app
 ################# About the Site ##################
  1. This is an online course website
  2. By This Website you can learn about latest topics on  programming language.
