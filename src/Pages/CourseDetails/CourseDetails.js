@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
+import Pdf from "react-to-pdf";
 import { Button, Card, CardImg } from 'react-bootstrap';
-import CardHeader from 'react-bootstrap/esm/CardHeader';
 import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../Authentication/AuthProvider';
 import './CourseDetails.css';
+
+const ref = React.createRef();
 
 const CourseDetails = () => {
     const { selected, selectedCourse } = useContext(AuthContext);
@@ -16,10 +18,14 @@ const CourseDetails = () => {
 
     return (
         <div>
-            <Card className=' mt-3'>
+            <Card ref={ref} className=' mt-3'>
                 <Card.Header className=' d-flex justify-content-between'>
-                    <Card.Title className=' details_title display-6 fw-bolder' >{name} Course Details </Card.Title>
-                    <Button variant="primary">Download as Pdf</Button>
+                    <Card.Title className=' details_title fw-bolder' >{name} Course Details </Card.Title>
+
+                    <Pdf targetRef={ref} filename="courseDetails.pdf">
+                        {({ toPdf }) => <Button style={{ height: "40px" }} variant='primary' onClick={toPdf}>Generate Pdf</Button>}
+                    </Pdf>
+
                 </Card.Header>
                 <Card.Body>
                     {/* <Card.Title>Special title treatment</Card.Title> */}

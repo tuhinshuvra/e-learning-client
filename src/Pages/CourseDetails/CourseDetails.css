@@ -1,3 +1,7 @@
+.details_title {
+    font-size: 30px;
+}
+
 @media (max-width: 575.98px) {
 
     .details_title {
