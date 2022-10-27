@@ -1,7 +1,9 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import app from '../../firebase/firebase.config';
+import './ToggleTheme.css';
 
+export const ThemeContext = createContext(null);
 export const AuthContext = createContext();
 
 const auth = getAuth(app);
@@ -10,6 +12,7 @@ const AuthProvider = ({ children }) => {
     const [selected, setSelected] = useState([]);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [theme, setTheme] = useState("light");
 
 
     const googleProviderLogin = (provider) => {
@@ -58,6 +61,10 @@ const AuthProvider = ({ children }) => {
         setSelected(id);
     }
 
+    const toggleTheme = () => {
+        setTheme((curr) => curr === "light" ? "dark" : "light")
+    }
+
     const authInfo = {
         user,
         loading,
@@ -72,11 +79,17 @@ const AuthProvider = ({ children }) => {
         selectedCourse,
     };
 
+    const themeInfo = {
+        theme, toggleTheme
+    }
+
     return (
-        <div>
-            <AuthContext.Provider value={authInfo}>
-                {children}
-            </AuthContext.Provider>
+        <div id={theme}>
+            <ThemeContext.Provider value={themeInfo}>
+                <AuthContext.Provider value={authInfo}>
+                    {children}
+                </AuthContext.Provider>
+            </ThemeContext.Provider>
         </div>
     );
 };

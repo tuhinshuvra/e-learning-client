@@ -1,12 +1,13 @@
 import { useContext } from 'react';
-import { Button, Image, NavItem } from 'react-bootstrap';
+import { Button, Image } from 'react-bootstrap';
+import ReactSwitch from 'react-switch';
 import { FaUser } from 'react-icons/fa';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../Authentication/AuthProvider';
+import { AuthContext, ThemeContext } from '../Authentication/AuthProvider';
 import LeftSideNav from '../LeftSideNav/LeftSideNav';
 import Logo from '../../logo/brain_boost_course_logo.png';
 import './Header.css';
@@ -14,12 +15,17 @@ import './Header.css';
 
 function Header() {
     const { user, logOut } = useContext(AuthContext);
+    const { theme, toggleTheme } = useContext(ThemeContext);
 
     const handleLogOut = () => {
         logOut()
             .then(() => { })
             .catch((error) => { console.log("Error : ", error); })
     }
+
+    // const displayUserName = () => {
+    //     user.displayName;
+    // }
 
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -47,6 +53,14 @@ function Header() {
                         </NavDropdown>
                     </Nav>
                     <Nav>
+                        <div className='switch me-2'>
+                            <label>{theme === 'light' ? "Light Mode" : "Dark Mode"}</label>
+                            <ReactSwitch
+                                onChange={toggleTheme} checked={theme === "light"}
+                            ></ReactSwitch>
+                        </div>
+                    </Nav>
+                    <Nav>
                         <Link className=' text-decoration-none text-light fw-bolder me-2 d-none d-lg-block' to="/">All Course</Link>
                         <Link className=' text-decoration-none text-light fw-bolder me-2' to="/blog" >Blog</Link>
                         {/* <Nav className=' d-lg-none'> <LeftSideNav></LeftSideNav></Nav> */}
@@ -58,9 +72,9 @@ function Header() {
                                     <Button onClick={handleLogOut} className=' btn btn-sm btn-danger ms-2'>Logout</Button>
                                     {
                                         user?.photoURL ?
-                                            <Link to="/profile"> <Image roundedCircle style={{ width: '30px' }} src={user?.photoURL}></Image></Link>
+                                            <Link to="/profile"> <Image onMouseOver={user?.displayName} roundedCircle style={{ width: '30px' }} src={user?.photoURL}></Image></Link>
                                             :
-                                            <Link to="/profile"> <FaUser className='ms-2'></FaUser></Link>
+                                            <Link to="/profile"> <FaUser onMouseOver={user?.displayName} className='ms-2'></FaUser></Link>
                                     }
                                 </div>
                                 :

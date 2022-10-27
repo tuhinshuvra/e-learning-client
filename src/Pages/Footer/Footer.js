@@ -4,7 +4,7 @@ import './Footer.css';
 const Footer = () => {
     return (
         <div>
-            <p className=' text-center'>Copy right @ 2022. All right reserved by Tuhin Shuvra</p>
+            <p className=' text-center'>Copyright @ 2022. All right reserved by Tuhin Shuvra</p>
         </div>
     );
 };
