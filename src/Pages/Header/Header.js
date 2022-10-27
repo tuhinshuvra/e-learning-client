@@ -63,11 +63,12 @@ function Header() {
                     <Nav>
                         <Link className=' text-decoration-none text-light fw-bolder me-2 d-none d-lg-block' to="/">All Course</Link>
                         <Link className=' text-decoration-none text-light fw-bolder me-2' to="/blog" >Blog</Link>
+                        <Link className=' text-decoration-none text-light fw-bolder me-2' to="/faq" >FAQ</Link>
                         {/* <Nav className=' d-lg-none'> <LeftSideNav></LeftSideNav></Nav> */}
                         <Nav className=' text-light'>
                             {user?.uid ?
                                 <div>
-                                    {user?.displayName}
+                                    {user?.displayName} {"  "}
                                     {user?.email}
                                     <Button onClick={handleLogOut} className=' btn btn-sm btn-danger ms-2'>Logout</Button>
                                     {

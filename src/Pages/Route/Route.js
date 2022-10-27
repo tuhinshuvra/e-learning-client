@@ -12,6 +12,7 @@ import PrivateRoute from './PrivateRoute';
 import CourseSummary from '../Courses/CourseSummary';
 import CourseDetails from '../CourseDetails/CourseDetails';
 import CheckOut from '../CheckOut/CheckOut';
+import FAQ from '../FAQ/FAQ';
 
 
 export const routes = createBrowserRouter([
@@ -27,6 +28,10 @@ export const routes = createBrowserRouter([
                 path: '/courses/:id',
                 element: <CourseDetails></CourseDetails>,
                 loader: ({ params }) => fetch(`https://brain-food-server.vercel.app/courses/${params.id}`)
+            },
+            {
+                path: '/faq',
+                element: <FAQ></FAQ>
             },
             {
                 path: '/blog',
