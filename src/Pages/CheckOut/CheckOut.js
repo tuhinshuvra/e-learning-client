@@ -1,10 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Button, Card } from 'react-bootstrap';
+import CardHeader from 'react-bootstrap/esm/CardHeader';
 import toast, { Toaster } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Authentication/AuthProvider';
 import './CheckOut.css';
 
 const CheckOut = () => {
+    const { user, logOut } = useContext(AuthContext);
     const [courses, setCourses] = useState([]);
     const { selected } = useContext(AuthContext);
     console.log("Selected : ", selected);
@@ -46,10 +49,16 @@ const CheckOut = () => {
 
 
     return (
-        <div className=''>
-            <h3 className=' text-center fw-bold text-success mt-5'>Welcome to checkout</h3>
-            <p className=' text-center fw-bold'>Yours Selected Course ID - {selected}, Name : {courseName} Learning </p>
-            <Link to="/"> <button className='btn btn-success'>Check Out</button> </Link>
+        <div>
+            <Card className=' m-lg-5 p-lg-3 mt-sm-3 ' >
+                <CardHeader className=' text-center fw-bold text-success mt-2'>
+                    <h3 >Mr/Ms. {user?.displayName} Welcome to checkout</h3>
+                </CardHeader>
+                <Card.Text className=' text-center fw-bold mt-lg-3'>
+                    Yours Selected Course ID - {selected}, Name : {courseName} Learning
+                </Card.Text>
+                <Link to="/"> <button className='btn btn-success'>Check Out</button> </Link>
+            </Card>
         </div>
     );
 };
