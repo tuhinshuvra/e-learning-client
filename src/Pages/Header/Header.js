@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Button, Image } from 'react-bootstrap';
+import { Button, Image, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import ReactSwitch from 'react-switch';
 import { FaUser } from 'react-icons/fa';
 import Container from 'react-bootstrap/Container';
@@ -23,10 +23,6 @@ function Header() {
             .catch((error) => { console.log("Error : ", error); })
     }
 
-    // const displayUserName = () => {
-    //     user.displayName;
-    // }
-
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
@@ -38,27 +34,18 @@ function Header() {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        {/* <Nav.Link href="#features">Features</Nav.Link> */}
-                        {/* <Nav.Link href="#pricing">Pricing</Nav.Link> */}
                         <NavDropdown className=' d-lg-none ' title="All Course" id="collasible-nav-dropdown">
-                            {/* <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">
-                                Another action
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item> */}
                             <NavDropdown.Divider />
                             <NavDropdown.Item>
                                 <Nav className=' d-lg-none'> <LeftSideNav></LeftSideNav></Nav>
                             </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
-                    <Nav>
-                        <div className='switch me-2'>
-                            <label>{theme === 'light' ? "Light Mode" : "Dark Mode"}</label>
-                            <ReactSwitch
-                                onChange={toggleTheme} checked={theme === "light"}
-                            ></ReactSwitch>
-                        </div>
+                    <Nav className='switch me-2'>
+                        <label>{theme === 'light' ? "Light Mode" : "Dark Mode"}</label>
+                        <ReactSwitch
+                            onChange={toggleTheme} checked={theme === "light"}
+                        ></ReactSwitch>
                     </Nav>
                     <Nav>
                         <Link className=' text-decoration-none text-light fw-bolder me-2 d-none d-lg-block' to="/">All Course</Link>
@@ -73,10 +60,17 @@ function Header() {
                                     <Button onClick={handleLogOut} className=' btn btn-sm btn-danger ms-2'>Logout</Button>
                                     {
                                         user?.photoURL ?
-                                            <Link to="/profile"> <Image onMouseOver={user?.displayName} roundedCircle style={{ width: '30px' }} src={user?.photoURL}></Image></Link>
+                                            <OverlayTrigger placement="left" overlay={<Tooltip id="button-tooltip-2">{user?.displayName}</Tooltip>}>
+                                                {({ ref, ...triggerHandler }) => (
+                                                    <Button variant="dark"  {...triggerHandler}>
+                                                        <Link to="/profile"><Image ref={ref} roundedCircle style={{ width: '30px' }} src={user?.photoURL} /> </Link>
+                                                    </Button>
+                                                )}
+                                            </OverlayTrigger>
                                             :
                                             <Link to="/profile"> <FaUser onMouseOver={user?.displayName} className='ms-2'></FaUser></Link>
                                     }
+
                                 </div>
                                 :
                                 <>
