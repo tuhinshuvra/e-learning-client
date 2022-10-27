@@ -1,5 +1,5 @@
 import React, { useContext, useReducer, useState } from 'react';
-import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider, sendPasswordResetEmail } from 'firebase/auth';
 import { ButtonGroup, Button, Form } from 'react-bootstrap';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -9,9 +9,10 @@ import './Login.css';
 
 
 const Login = () => {
-    const { user, setLoading, signIn, googleProviderLogin, githubProviderLogin } = useContext(AuthContext);
+    const { user, setLoading, signIn, resetForgetPassword, googleProviderLogin, githubProviderLogin } = useContext(AuthContext);
 
     const [error, setError] = useState('');
+    const [userEmail, setUserEmail] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -30,11 +31,7 @@ const Login = () => {
                 console.log("User Data : ", user);
                 form.reset();
                 setError('');
-                // if (user.emailVerified) {
                 navigate(from, { replace: true });
-                // } else {
-                //     toast.error('Your email is not verified.');
-                // }
             })
             .catch(error => {
                 setError(error.message)
@@ -69,6 +66,27 @@ const Login = () => {
             .catch(error => console.error("Github Provider Error : ", error))
     }
 
+    const handleEmailBlur = event => {
+        const email = event.target.value;
+        setUserEmail(email);
+    }
+
+    const handleForgetPassword = () => {
+        if (!userEmail) {
+            toast.error('Please enter your email address.')
+            return;
+        }
+
+        resetForgetPassword(userEmail)
+            .then(() => {
+                toast.success('Reset Password Send, Please Check it.')
+            })
+            .catch(error => {
+                console.log('Password reset Error : ', error);
+                setError(error);
+            })
+    }
+
     return (
         <div className='container p-5'>
 
@@ -80,7 +98,7 @@ const Login = () => {
                 </Form.Text>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email</Form.Label>
-                    <Form.Control name='email' type="email" placeholder="Enter email" required />
+                    <Form.Control onBlur={handleEmailBlur} name='email' type="email" placeholder="Enter email" required />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -93,6 +111,7 @@ const Login = () => {
                 </Button>
                 <p className=' text-primary'>If you are not yet registered <Link to="/register" >go to Register</Link></p>
             </Form>
+            <p className=' text-primary'>Forgot password? <button onClick={handleForgetPassword} className=' btn btn-sm btn-primary' >Reset Password</button>  </p>
 
             <div className=' mt-2 text-center'>
                 <ButtonGroup vertical>

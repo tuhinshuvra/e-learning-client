@@ -55,8 +55,8 @@ function Header() {
                         <Nav className=' text-light'>
                             {user?.uid ?
                                 <div>
-                                    {user?.displayName} {"  "}
-                                    {user?.email}
+                                    {user?.displayName}
+                                    {/* {user?.email} */}
                                     <Button onClick={handleLogOut} className=' btn btn-sm btn-danger ms-2'>Logout</Button>
                                     {
                                         user?.photoURL ?
